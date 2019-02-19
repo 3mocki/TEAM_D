@@ -1,10 +1,5 @@
-import asyncore
-import logging
-import adc
-import time
-import sensor
+import asyncore, logging, time, sensor
 from bterror import BTError
-from time import sleep
 import threading
 from MySqlite import *
 

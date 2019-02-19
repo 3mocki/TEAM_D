@@ -1,52 +1,49 @@
 import threading
-import math
 from neo import Gpio
-
 
 class Reader:
     # S0,S1,S2,S3
-    selector_pins = [16, 17, 18, 19]
+    selector_pins = [8, 9, 10, 11]
 
     # Number of connected to MUX Board
     mux_channel = {
-        'temp1': 1,
-        'no2': {'we': 2, 'ae': 3},
-        'o3': {'we': 4, 'ae': 5},
-        'co': {'we': 6, 'ae': 7},
-        'so2': {'we': 8, 'ae': 9},
-        'pm2_5': 10,
+        'temp1': 0,
+        'no2': {'we': 1, 'ae': 2},
+        'o3': {'we': 3, 'ae': 4},
+        'co': {'we': 5, 'ae': 6},
+        'so2': {'we': 7, 'ae': 8},
+        'pm2_5': 9,
     }
 
-    # Refer to Calibration Certificates
+    # Refer to 25-000160 Alphasense Datasheet
     calibration = {
         'no2': {
             'n': [1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 1.18, 2.00],
-            'we_zero': 215,
-            'ae_zero': 246,
-            'sensitivity': 0.258
+            'we_zero': 295,
+            'ae_zero': 282,
+            'sensitivity': 0.228
         },
         'o3': {
             'n': [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18],
-            'we_zero': 390,
-            'ae_zero': 393,
-            'sensitivity': 0.379
+            'we_zero': 391,
+            'ae_zero': 390,
+            'sensitivity': 0.399
         },
         'co': {
             'n': [1.40, 1.03, 0.85, 0.62, 0.30, 0.03, -0.25, -0.48],
-            'we_zero': 326,
-            'ae_zero': 280,
-            'sensitivity': 0.333
+            'we_zero': 347,
+            'ae_zero': 296,
+            'sensitivity': 0.267
         },
         'so2': {
             'n': [0.85, 0.85, 0.85, 0.85, 0.85, 1.15, 1.45, 1.75],
-            'we_zero': 380,
-            'ae_zero': 306,
-            'sensitivity': 0.371
+            'we_zero': 345,
+            'ae_zero': 255,
+            'sensitivity': 0.318
         }
     }
 
     def __init__(self):
-
         self.lock = threading.Lock()
         self.gpio = Gpio()
 
@@ -62,17 +59,13 @@ class Reader:
         return round(self.__calibrate('no2') * 1000, 2)
 
     def read_o3(self):
-        o3 = round(self.__calibrate('o3') * 100, 2)  # Had a problem on sensors
-        if o3 < 0:
-            return 0
-        else:
-            return o3
+        return round(self.__calibrate('o3') * 100, 2)
 
     def read_co(self):
         return round(self.__calibrate('co'), 2)
 
     def read_so2(self):
-        return round(self.__calibrate('so2') * 1000, 2)  # Had a problem on sensors
+        return round(self.__calibrate('so2') * 1000, 2)
 
     def read_temp(self):
         mV = self.__read_adc(Reader.mux_channel['temp1'])
@@ -87,7 +80,7 @@ class Reader:
         hppcf = 240 * (v ** 6) - 2491.3 * (v ** 5) + 9448.7 * (v ** 4) - 14840 * (v ** 3) + 10684 * (
                     v ** 2) + 2211.8 * v + 7.9623
         ugm3 = .518 + .00274 * hppcf
-        return round(ugm3, 2)
+        return round(ugm3, 3)
 
     def __read_adc(self, channel):
         s_bin = self.__dec_to_bin(channel)

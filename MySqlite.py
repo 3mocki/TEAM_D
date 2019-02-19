@@ -1,6 +1,5 @@
 import sqlite3
 from datetime import timedelta
-import datetime
 from aqi import *
 
 
