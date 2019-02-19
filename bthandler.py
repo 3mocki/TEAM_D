@@ -124,11 +124,11 @@ class BTClientHandler(asyncore.dispatcher_with_send):
                 # No new line character in data, so we append all.
                 self.data += data
             else:
-            	self.data += data[:lf_char_index]
-            	#a = []
-            	if self.data.split(',')[0] == "sensor":
-            		with lock:
-	                	global bConnectApp
+                self.data += data[:lf_char_index]
+                #a = []
+                if self.data.split(',')[0] == "sensor":
+                    with lock:
+                        global bConnectApp
                         bConnectApp = True
                         global bSensHisOnce
                         bSensHisOnce = True
@@ -136,14 +136,14 @@ class BTClientHandler(asyncore.dispatcher_with_send):
                 # Clear the buffer
                 self.data = ""
 
-       	except Exception as e:
-        	BTError.print_error(handler=self, error=BTError.ERR_READ, error_message=repr(e))
-        	self.data = ""
-        	lf_char_index = -1
-        	with lock:
-        	    global testValue
-        	    testValue = False
-        	self.handle_close()
+        except Exception as e:
+            BTError.print_error(handler=self, error=BTError.ERR_READ, error_message=repr(e))
+            self.data = ""
+            lf_char_index = -1
+            with lock:
+                global testValue
+                testValue = False
+            self.handle_close()
 
     def handle_close(self):
         # flush the buffer
