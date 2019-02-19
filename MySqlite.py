@@ -10,7 +10,7 @@ class MySqlite:
         self.db = sqlite3.connect(self.dbName)
         self.cursor = self.db.cursor()
 
-    def DeleteTable(self):
+    def deleteTable(self):
         self.cursor.execute('Drop Table If Exists ' + self.airData)
 
     def DeleteAllDataAtTable(self):

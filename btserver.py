@@ -65,7 +65,7 @@ class BTServer(asyncore.dispatcher):
         self.close()
 
 if __name__ == '__main__':
-    uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
+    uuid = "94f39d2c9-7d6d-437d-973b-fba39e49d4ee"
     service_name = "AsynchronousBTServer"
 
     server = BTServer(uuid, service_name)
