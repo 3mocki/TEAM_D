@@ -13,9 +13,8 @@ class MySqlite:
     def DeleteTable(self):
         self.cursor.execute('Drop Table If Exists ' + self.airData)
 
-    def DeleteAllDataAtTable(self, idx):
-        if idx == 'sensorair':
-            self.cursor.execute('delete from ' + self.airData)
+    def DeleteAllDataAtTable(self):
+        self.cursor.execute('delete from ' + self.airData)
 
     def createTable(self):
         self.cursor.execute('create table ' + self.airData +
