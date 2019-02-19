@@ -17,6 +17,7 @@ bConnectApp = False;
 def realTimedAirData():
     mySqlite = MySqlite('sensor')
     mySqlite.connectDB()
+    mySqlite.createTable()
     print (mySqlite.MakeCSVFormatStr(False))
     while True:
         global bConnectApp

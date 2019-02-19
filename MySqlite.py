@@ -17,7 +17,7 @@ class MySqlite:
         if idx == 'sensorair':
             self.cursor.execute('delete from ' + self.airData)
 
-    def CreateTable(self):
+    def createTable(self):
         self.cursor.execute('create table ' + self.airData +
                             ' (no INTEGER PRIMARY KEY, pm FLOAT, co FLOAT, o3 FLOAT, no2 FLOAT, so2 FLOAT, temp FLOAT, pmAqi INT, coAqi INT, o3Aqi INT, no2Aqi INT, so2Aqi INT)')
 
