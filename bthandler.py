@@ -20,7 +20,7 @@ bSendHistorical = False;
 
 def realTimedAirData():
     mySqlite = MySqlite('sensor')
-    mySqlite.ConnectToDB()
+    mySqlite.connectDB()
     mySqlite.DeleteAllDataAtTable('hisair')
     print (mySqlite.MakeCSVFormatStr(False))
     while True:
@@ -63,7 +63,7 @@ def realTimedAirData():
         print ('so2aiq : ' + splitStr[10])
 
         time.sleep(1)
-    mySqlite.CloseDB()
+    mySqlite.closeDB()
 
 t1 = threading.Thread(target=realTimedAirData)
 t1.daemon = True
@@ -71,7 +71,7 @@ t1.start()
 
 def historicalAirData():
     mySqlite = MySqlite('sensor')
-    mySqlite.ConnectToDB()
+    mySqlite.connectDB()
     while True:
         global bSendHistorical
         if bSendHistorical == True:
@@ -84,7 +84,7 @@ def historicalAirData():
                 print (sendStr)
             bSendHistorical = False
         time.sleep(1)
-    mySqlite.CloseDB()
+    mySqlite.closeDB()
 
 t2 = threading.Thread(target=historicalAirData)
 t2.daemon = True
