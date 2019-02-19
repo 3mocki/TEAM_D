@@ -27,7 +27,7 @@ def realTimedAirData():
     mySqlite = MySqlite('sensor')
     mySqlite.ConnectToDB()
     mySqlite.DeleteAllDataAtTable('hisair')
-    print mySqlite.MakeCSVFormatStr(False)
+    print (mySqlite.MakeCSVFormatStr(False))
     while True:
         global bConnectApp
         pm = reader.read_pm()
@@ -52,20 +52,20 @@ def realTimedAirData():
             except:
                 bConnectApp = False
             mySqlite.DeleteAllDataAtTable('hisair')
-        print '\nIsAppConnect : ' + str(bConnectApp)
-        print 'BoardID : ' +str(gBoardID)
+        print ('\nIsAppConnect : ' + str(bConnectApp))
+        print ('BoardID : ' +str(gBoardID))
         splitStr = strSensorData.split(',')
-        print 'pm : ' + splitStr[0] +'u/m^3'
-        print 'co : ' + splitStr[1] +'ppm'
-        print 'o3 : ' + splitStr[2] +'ppb'
-        print 'no2 : ' + splitStr[3] +'ppb'
-        print 'so2 : ' + splitStr[4] +'ppb'
-        print 'temp : ' + splitStr[5] +'F'
-        print 'pmaqi : ' + splitStr[6]
-        print 'coaqi : ' + splitStr[7]
-        print 'o3aqi : ' + splitStr[8]
-        print 'no2aqi : ' + splitStr[9]
-        print 'so2aiq : ' + splitStr[10]
+        print ('pm : ' + splitStr[0] +'u/m^3')
+        print ('co : ' + splitStr[1] +'ppm')
+        print ('o3 : ' + splitStr[2] +'ppb')
+        print ('no2 : ' + splitStr[3] +'ppb')
+        print ('so2 : ' + splitStr[4] +'ppb')
+        print ('temp : ' + splitStr[5] +'F')
+        print ('pmaqi : ' + splitStr[6])
+        print ('coaqi : ' + splitStr[7])
+        print ('o3aqi : ' + splitStr[8])
+        print ('no2aqi : ' + splitStr[9])
+        print ('so2aiq : ' + splitStr[10])
 
         time.sleep(1)
     mySqlite.CloseDB()
@@ -85,8 +85,8 @@ def historicalAirData():
                 sendStr = 'StoredData,' + str(gBoardID) + ',' + x
                 gSocket.send(sendStr.rstrip(',') + '\n')
                 time.sleep(0.01)
-                print '@@@@@@@@@@@@@@SendHsitorical Data@@@@@@@@@@@@@@'
-                print sendStr
+                print ('@@@@@@@@@@@@@@SendHsitorical Data@@@@@@@@@@@@@@')
+                print (sendStr)
             bSendHistorical = False
         time.sleep(1)
     mySqlite.CloseDB()
@@ -111,7 +111,7 @@ class BTClientHandler(asyncore.dispatcher_with_send):
             if not data:
                 return
 
-            print data
+            print (data)
             curTime = data.split(',')[1]
             curTime = datetime.datetime.strptime(curTime.strip('\n'), "%Y-%m-%d %H:%M:%S")
             global gCurTime

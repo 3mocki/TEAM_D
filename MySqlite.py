@@ -43,7 +43,7 @@ class MySqlite:
         calResO3 = 0
         calResNo2 = 0
         calResSo2 = 0
-        for x in xrange(0, 5):
+        for x in range(0, 5):
             if x == 0:
                 calResPm = int(CalPm25Aqi(airAve[0]))
             elif x == 1:
@@ -67,17 +67,17 @@ class MySqlite:
 
     def PrintTableData(self):
         self.cursor.execute('select * from ' + self.allAirDataTableName)
-        print
-        '\nallair'
+        print(
+        '\nallair')
         for row in self.cursor:
-            print
-            row
+            print(
+            row)
         self.cursor.execute('select * from ' + self.hisAirDataTableName)
-        print
-        '\nhisair'
+        print(
+        '\nhisair')
         for row in self.cursor:
-            print
-            row
+            print(
+            row)
 
     def GetAllDataCount(self):
         self.cursor.execute('SELECT count(*) FROM ' + self.allAirDataTableName)
@@ -96,7 +96,7 @@ class MySqlite:
         for row in self.cursor:
             rowCount = int(row[0])
         intForRepeat = rowCount + 1
-        for x in xrange(1, intForRepeat):
+        for x in range(1, intForRepeat):
             tempTime = dateTime + timedelta(seconds=-rowCount)
             rowCount -= 1
             self.cursor.execute('update ' + self.hisAirDataTableName +
@@ -116,7 +116,7 @@ class MySqlite:
             self.cursor.execute(
                 'select * from ' + self.allAirDataTableName + ' where no = (SELECT MAX(no)  FROM ' + self.allAirDataTableName + ');')
             for row in self.cursor:
-                for x in xrange(1, 12):
+                for x in range(1, 12):
                     airDataCSV += str(row[x]) + ','
             return airDataCSV
         else:
@@ -129,7 +129,7 @@ class MySqlite:
                     hisAirDAtaArr.append(airDataCSV.rstrip(','))
                     airDataCSV = ''
                     a = 0
-                for x in xrange(1, 13):
+                for x in range(1, 13):
                     airDataCSV += str(row[x]) + ','
                 a += 1
             if airDataCSV != '':

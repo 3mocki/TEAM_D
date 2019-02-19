@@ -38,7 +38,7 @@ class BTServer(asyncore.dispatcher):
 
         self.port = self.socket.getsockname()[1]
         logger.info("Waiting for connection on RFCOMM channel %d" % self.port)
-        print "Waiting for connection on RFCOMM channel %d" % self.port
+        print ("Waiting for connection on RFCOMM channel %d" % self.port)
 
     def handle_accept(self):
         # This method is called when an incoming connection request from a client is accept.
@@ -52,8 +52,8 @@ class BTServer(asyncore.dispatcher):
 
             logger.info("Accepted connection from %s," % repr(client_addr[0]) +
                         " number of active connections is %d" % len(self.active_client_handlers))
-            print "Accepted connection from %s," % repr(client_addr[0]) + \
-                  " number of active connections is %d" % len(self.active_client_handlers)
+            print ("Accepted connection from %s," % repr(client_addr[0]) + \
+                  " number of active connections is %d" % len(self.active_client_handlers))
 
     def handle_connect(self):
         # This method is called when the connection is established.
