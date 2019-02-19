@@ -21,7 +21,7 @@ bSendHistorical = False;
 def realTimedAirData():
     mySqlite = MySqlite('sensor')
     mySqlite.connectDB()
-    mySqlite.DeleteAllDataAtTable('hisair')
+    mySqlite.DeleteAllDataAtTable('sensorhis')
     print (mySqlite.MakeCSVFormatStr(False))
     while True:
         global bConnectApp
@@ -46,7 +46,7 @@ def realTimedAirData():
                 gSocket.send(str(gBoardID) + ',' + strSensorData.rstrip(','))
             except:
                 bConnectApp = False
-            mySqlite.DeleteAllDataAtTable('hisair')
+            mySqlite.DeleteAllDataAtTable('sensorhis')
         print ('\nIsAppConnect : ' + str(bConnectApp))
         print ('BoardID : ' +str(gBoardID))
         splitStr = strSensorData.split(',')

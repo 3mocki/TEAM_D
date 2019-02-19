@@ -65,17 +65,13 @@ class MySqlite:
 
     def PrintTableData(self):
         self.cursor.execute('select * from ' + self.airData)
-        print(
-        '\nallair')
+        print('\nallair')
         for row in self.cursor:
-            print(
-            row)
+            print(row)
         self.cursor.execute('select * from ' + self.hisAir)
-        print(
-        '\nhisair')
+        print('\nhisair')
         for row in self.cursor:
-            print(
-            row)
+            print(row)
 
     def GetAllDataCount(self):
         self.cursor.execute('SELECT count(*) FROM ' + self.airData)
