@@ -8,20 +8,15 @@ logger = logging.getLogger(__name__)
 reader=sensor.Reader()
 lock = threading.Lock()
 global bConnectApp
-global bSensHisOnce
-global bSendHistorical
 global gSocket
 global gCurTime
 global gBoardID
 gBoardID = 0
-bSensHisOnce = False;
 bConnectApp = False;
-bSendHistorical = False;
 
 def realTimedAirData():
     mySqlite = MySqlite('sensor')
     mySqlite.connectDB()
-    mySqlite.DeleteAllDataAtTable('sensorhis')
     print (mySqlite.MakeCSVFormatStr(False))
     while True:
         global bConnectApp
@@ -32,21 +27,14 @@ def realTimedAirData():
         so2 = reader.read_so2()
         temp = reader.read_temp()
         mySqlite.InsertAirData(pm, co, o3, no2, so2, temp, not bConnectApp)
-        mySqlite.CommitDB()
+        mySqlite.commitDB()
         strSensorData = mySqlite.MakeCSVFormatStr(True)
         if bConnectApp == True:
-            mySqlite.SetTimeToHisData(gCurTime)
-            mySqlite.CommitDB()
-            global bSensHisOnce
-            if bSensHisOnce == True:
-                global bSendHistorical
-                bSendHistorical = True
-                bSensHisOnce = False
+            mySqlite.commitDB()
             try:
                 gSocket.send(str(gBoardID) + ',' + strSensorData.rstrip(','))
             except:
                 bConnectApp = False
-            mySqlite.DeleteAllDataAtTable('sensorhis')
         print ('\nIsAppConnect : ' + str(bConnectApp))
         print ('BoardID : ' +str(gBoardID))
         splitStr = strSensorData.split(',')
@@ -68,27 +56,6 @@ def realTimedAirData():
 t1 = threading.Thread(target=realTimedAirData)
 t1.daemon = True
 t1.start()
-
-def historicalAirData():
-    mySqlite = MySqlite('sensor')
-    mySqlite.connectDB()
-    while True:
-        global bSendHistorical
-        if bSendHistorical == True:
-            strSensorData = mySqlite.MakeCSVFormatStr(False)
-            for x in strSensorData:
-                sendStr = 'StoredData,' + str(gBoardID) + ',' + x
-                gSocket.send(sendStr.rstrip(',') + '\n')
-                time.sleep(0.01)
-                print ('@@@@@@@@@@@@@@SendHsitorical Data@@@@@@@@@@@@@@')
-                print (sendStr)
-            bSendHistorical = False
-        time.sleep(1)
-    mySqlite.closeDB()
-
-t2 = threading.Thread(target=historicalAirData)
-t2.daemon = True
-t2.start()
 
 class BTClientHandler(asyncore.dispatcher_with_send):
     """BT handler for client-side socket"""
