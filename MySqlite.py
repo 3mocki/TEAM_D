@@ -15,12 +15,12 @@ class MySqlite:
 
     def createTable(self):
         self.cursor.execute('create table ' + self.airData +
-                            ' (no INTEGER PRIMARY KEY, pm FLOAT, co FLOAT, o3 FLOAT, no2 FLOAT, so2 FLOAT, temp FLOAT, pmAqi INT, coAqi INT, o3Aqi INT, no2Aqi INT, so2Aqi INT)')
+                            ' (no INTEGER PRIMARY KEY, temp FLOAT, no2 FLOAT, o3 FLOAT, co FLOAT, so2 FLOAT, pm FLOAT, no2Aqi INT, o3Aqi INT, coAqi INT, so2Aqi INT, pmAqi INT)')
 
-    def insertData(self, pm, co, o3, no2, so2, temp, isDisConnect):
+    def insertData(self, temp, no2, o3, co, so2, pm, isDisConnect):
         self.cursor.execute('insert into ' + self.airData +
-                            '(pm, co, o3, no2, so2, temp, pmAqi, coAqi, o3Aqi, no2Aqi, so2Aqi) values (?,?,?,?,?,?,?,?,?,?,?);',
-                            (pm, co, o3, no2, so2, temp, 0, 0, 0, 0, 0))
+                            '(temp, no2, o3, co, so2, pm, no2Aqi, o3Aqi, coAqi, so2Aqi, pmAqi,) values (?,?,?,?,?,?,?,?,?,?,?);',
+                            (temp, no2, o3, co, so2, pm, 0, 0, 0, 0, 0))
         if self.GetAllDataCount() > 120:
             self.cursor.execute(
                 'delete from ' + self.airData + ' where no in (select no from ' + self.airData + ' limit 1)')
