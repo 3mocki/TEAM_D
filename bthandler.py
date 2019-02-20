@@ -14,7 +14,7 @@ global gBoardID
 gBoardID = 0
 bConnectApp = False;
 
-def realTimedAirData():
+def getAir():
     mySqlite = MySqlite('sensor')
     mySqlite.connectDB()
     mySqlite.deleteTable()
@@ -50,12 +50,12 @@ def realTimedAirData():
         print ('o3_AQI : ' + splitStr[7])
         print ('co_AQI : ' + splitStr[8])
         print ('so2_AQI : ' + splitStr[9])
-        print ('pm2.5aiq : ' + splitStr[10])
+        print ('pm2.5_AQI : ' + splitStr[10])
 
         time.sleep(1)
     mySqlite.closeDB()
 
-t1 = threading.Thread(target=realTimedAirData)
+t1 = threading.Thread(target=getAir)
 t1.daemon = True
 t1.start()
 
