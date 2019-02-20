@@ -12,7 +12,7 @@ global gSocket
 global gCurTime
 global gBoardID
 gBoardID = 0
-bConnectApp = False;
+bConnectApp = True
 
 def getAir():
     mySqlite = MySqlite('sensor')
