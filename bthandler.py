@@ -28,7 +28,7 @@ def realTimedAirData():
         no2 = reader.read_no2()
         so2 = reader.read_so2()
         temp = reader.read_temp()
-        mySqlite.insertData(pm, co, o3, no2, so2, temp, not bConnectApp)
+        mySqlite.insertData(temp, no2, o3, co, so2, pm)
         mySqlite.commitDB()
         strSensorData = mySqlite.MakeCSVFormatStr(True)
         if bConnectApp == True:
