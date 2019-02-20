@@ -28,7 +28,7 @@ def realTimedAirData():
         no2 = reader.read_no2()
         so2 = reader.read_so2()
         temp = reader.read_temp()
-        mySqlite.InsertAirData(pm, co, o3, no2, so2, temp, not bConnectApp)
+        mySqlite.insertData(pm, co, o3, no2, so2, temp, not bConnectApp)
         mySqlite.commitDB()
         strSensorData = mySqlite.MakeCSVFormatStr(True)
         if bConnectApp == True:
@@ -37,7 +37,7 @@ def realTimedAirData():
                 gSocket.send(str(gBoardID) + ',' + strSensorData.rstrip(','))
             except:
                 bConnectApp = False
-        print ('\nIsAppConnect : ' + str(bConnectApp))
+        print ('\nConnect Status : ' + str(bConnectApp))
         print ('BoardID : ' +str(gBoardID))
         splitStr = strSensorData.split(',')
         print ('pm : ' + splitStr[0] +'u/m^3')
