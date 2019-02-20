@@ -75,11 +75,11 @@ class BTClientHandler(asyncore.dispatcher_with_send):
             if not data:
                 return
 
-            print (data)
-            curTime = data.split(',')[1]
-            curTime = datetime.datetime.strptime(curTime.strip('\n'), "%Y-%m-%d %H:%M:%S")
-            global gCurTime
-            gCurTime = curTime
+            # print (data)
+            # curTime = data.split(',')[1]
+            # curTime = datetime.datetime.strptime(curTime.strip('\n'), "%Y-%m-%d %H:%M:%S")
+            # global gCurTime
+            # gCurTime = curTime
             global gBoardID
             gBoardID = int(data.split(',')[2])
             lf_char_index = data.find('\n')
@@ -94,8 +94,8 @@ class BTClientHandler(asyncore.dispatcher_with_send):
                     with lock:
                         global bConnectApp
                         bConnectApp = True
-                        global bSensHisOnce
-                        bSensHisOnce = True
+                        # global bSensHisOnce
+                        # bSensHisOnce = True
 
                 # Clear the buffer
                 self.data = ""
