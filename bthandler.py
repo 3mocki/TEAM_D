@@ -5,7 +5,7 @@ from MySqlite import *
 
 logger = logging.getLogger(__name__)
 
-reader=sensor.Reader()
+reader = sensor.Reader()
 lock = threading.Lock()
 global bConnectApp
 global gSocket

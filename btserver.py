@@ -4,7 +4,6 @@ from bthandler import BTClientHandler
 
 logger = logging.getLogger(__name__)
 
-
 class BTServer(asyncore.dispatcher):
     """Asynchronous Bluetooth Server"""
 
