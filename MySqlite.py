@@ -19,7 +19,7 @@ class MySqlite:
 
     def insertData(self, temp, no2, o3, co, so2, pm):
         self.cursor.execute('insert into ' + self.airData +
-                            '(temp, no2, o3, co, so2, pm, no2Aqi, o3Aqi, coAqi, so2Aqi, pmAqi,) values (?,?,?,?,?,?,?,?,?,?,?);',
+                            '(temp, no2, o3, co, so2, pm, no2Aqi, o3Aqi, coAqi, so2Aqi, pmAqi) values (?,?,?,?,?,?,?,?,?,?,?);',
                             (temp, no2, o3, co, so2, pm, 0, 0, 0, 0, 0))
         if self.GetAllDataCount() > 120:
             self.cursor.execute(
