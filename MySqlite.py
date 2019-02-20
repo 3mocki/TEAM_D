@@ -17,7 +17,7 @@ class MySqlite:
         self.cursor.execute('create table ' + self.airData +
                             ' (no INTEGER PRIMARY KEY, temp FLOAT, no2 FLOAT, o3 FLOAT, co FLOAT, so2 FLOAT, pm FLOAT, no2Aqi INT, o3Aqi INT, coAqi INT, so2Aqi INT, pmAqi INT)')
 
-    def insertData(self, temp, no2, o3, co, so2, pm, isDisConnect):
+    def insertData(self, temp, no2, o3, co, so2, pm):
         self.cursor.execute('insert into ' + self.airData +
                             '(temp, no2, o3, co, so2, pm, no2Aqi, o3Aqi, coAqi, so2Aqi, pmAqi,) values (?,?,?,?,?,?,?,?,?,?,?);',
                             (temp, no2, o3, co, so2, pm, 0, 0, 0, 0, 0))
