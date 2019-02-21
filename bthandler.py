@@ -7,9 +7,9 @@ logger = logging.getLogger(__name__)
 
 reader = sensor.Reader()
 lock = threading.Lock()
-global bConnectApp
+# global bConnectApp
 global gSocket
-bConnectApp = True
+# bConnectApp = True
 
 def getAir():
     mySqlite = MySqlite('sensor')
@@ -18,7 +18,8 @@ def getAir():
     mySqlite.createTable()
     print (mySqlite.MakeCSVFormatStr(False))
     while True:
-        global bConnectApp
+        # global bConnectApp
+        global gSocket
         pm = reader.read_pm()
         co = reader.read_co()
         o3 = reader.read_o3()
