@@ -9,9 +9,6 @@ reader = sensor.Reader()
 lock = threading.Lock()
 global bConnectApp
 global gSocket
-global gCurTime
-global gBoardID
-gBoardID = 0
 bConnectApp = True
 
 def getAir():
@@ -34,11 +31,10 @@ def getAir():
         if bConnectApp == True:
             mySqlite.commitDB()
             try:
-                gSocket.send(str(gBoardID) + ',' + strSensorData.rstrip(','))
+                gSocket.send(strSensorData.rstrip(','))
             except:
                 bConnectApp = False
         print ('\nConnect Status : ' + str(bConnectApp))
-        print ('BoardID : ' +str(gBoardID))
         splitStr = strSensorData.split(',')
         print ('temp : ' + splitStr[0] +'F')
         print ('no2 : ' + splitStr[1] +'ppm')
