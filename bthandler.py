@@ -62,7 +62,8 @@ class BTClientHandler(asyncore.dispatcher_with_send):
         asyncore.dispatcher_with_send.__init__(self, socket)
         self.server = server
         self.data = ""
-        global gSocket=self
+        global gSocket
+        gSocket=self
 
     def handle_read(self):
         try:
