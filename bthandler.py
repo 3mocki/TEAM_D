@@ -28,12 +28,12 @@ def getAir():
         mySqlite.insertData(temp, no2, o3, co, so2, pm)
         mySqlite.commitDB()
         strSensorData = mySqlite.MakeCSVFormatStr(True)
-        if bConnectApp == True:
-            mySqlite.commitDB()
-            try:
-                gSocket.send(strSensorData.rstrip(','))
-            except:
-                bConnectApp = False
+        # if bConnectApp == True:
+        #     mySqlite.commitDB()
+        #     try:
+        gSocket.send(strSensorData.rstrip(','))
+            # except:
+            #     bConnectApp = False
         print ('\nConnect Status : ' + str(bConnectApp))
         splitStr = strSensorData.split(',')
         print ('temp : ' + splitStr[0] +'F')
