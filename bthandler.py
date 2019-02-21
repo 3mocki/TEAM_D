@@ -81,7 +81,6 @@ class BTClientHandler(asyncore.dispatcher_with_send):
 
                 self.send((self.data + '\n').encode('ascii'))
 
-
                 # Clear the buffer
                 self.data = ""
         except Exception as e:
