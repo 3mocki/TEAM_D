@@ -9,6 +9,7 @@ reader = sensor.Reader()
 lock = threading.Lock()
 # global bConnectApp
 global gSocket
+gSocket = None
 # bConnectApp = True
 
 def getAir():
@@ -32,7 +33,8 @@ def getAir():
         # if bConnectApp == True:
         #     mySqlite.commitDB()
         #     try:
-        gSocket.send(strSensorData.rstrip(','))
+        if(gSocket != None):
+            gSocket(strSensorData.rstrip(','))
             # except:
             #     bConnectApp = False
         # print ('\nConnect Status : ' + str(bConnectApp))
@@ -64,7 +66,7 @@ class BTClientHandler(asyncore.dispatcher_with_send):
         self.server = server
         self.data = ""
         global gSocket
-        gSocket=self
+        gSocket = self
 
     def handle_read(self):
         try:
