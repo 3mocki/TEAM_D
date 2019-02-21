@@ -22,7 +22,7 @@ class BTServer(asyncore.dispatcher):
         # Create the server-side BT socket
         self.set_socket(BluetoothSocket(RFCOMM))
         self.bind(("", self.port))
-        self.listen(2)
+        self.listen(1)
 
         # Track the client-side handlers with a set
         self.active_client_handlers = set()
