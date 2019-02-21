@@ -31,7 +31,7 @@ def getAir():
         mySqlite.commitDB()
         strSensorData = mySqlite.MakeCSVFormatStr(True)
 
-        print('strSensorData => ', strSensorData)
+        print('strSensorData => ', strSensorData.rstrip(','))
         # if bConnectApp == True:
         #     mySqlite.commitDB()
         #     try:
