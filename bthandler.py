@@ -32,6 +32,7 @@ def getAir():
         strSensorData = mySqlite.MakeCSVFormatStr(True)
 
         print('strSensorData => ', strSensorData.rstrip(','))
+
         # if bConnectApp == True:
         #     mySqlite.commitDB()
         #     try:
@@ -53,7 +54,7 @@ def getAir():
         print ('so2_AQI : ' + splitStr[9])
         print ('pm2.5_AQI : ' + splitStr[10])
 
-        time.sleep(1)
+        time.sleep(5)
     mySqlite.closeDB()
 
 t1 = threading.Thread(target=getAir)
