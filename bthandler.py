@@ -18,6 +18,7 @@ def getAir():
     mySqlite.createTable()
     print (mySqlite.MakeCSVFormatStr(False))
     while True:
+        global bConnectApp
         pm = reader.read_pm()
         co = reader.read_co()
         o3 = reader.read_o3()
