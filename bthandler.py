@@ -31,12 +31,12 @@ def getAir():
         mySqlite.commitDB()
         strSensorData = mySqlite.MakeCSVFormatStr(True)
 
-        print('strSensorData => ', strSensorData.rstrip(',').encode(ascii))
+        print('strSensorData => ', strSensorData.rstrip(','))
         # if bConnectApp == True:
         #     mySqlite.commitDB()
         #     try:
         if(gSocket != None):
-            gSocket.send(str(strSensorData.rstrip(',')))
+            gSocket.send(str(strSensorData.rstrip(',').encode(ascii)))
             # except:
             #     bConnectApp = False
         # print ('\nConnect Status : ' + str(bConnectApp))
