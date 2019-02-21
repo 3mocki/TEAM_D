@@ -34,7 +34,7 @@ def getAir():
         gSocket.send(strSensorData.rstrip(','))
             # except:
             #     bConnectApp = False
-        print ('\nConnect Status : ' + str(bConnectApp))
+        # print ('\nConnect Status : ' + str(bConnectApp))
         splitStr = strSensorData.split(',')
         print ('temp : ' + splitStr[0] +'F')
         print ('no2 : ' + splitStr[1] +'ppm')
