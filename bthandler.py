@@ -18,7 +18,6 @@ def getAir():
     mySqlite.createTable()
     print (mySqlite.MakeCSVFormatStr(False))
     while True:
-        global bConnectApp
         pm = reader.read_pm()
         co = reader.read_co()
         o3 = reader.read_o3()
@@ -62,6 +61,7 @@ class BTClientHandler(asyncore.dispatcher_with_send):
         asyncore.dispatcher_with_send.__init__(self, socket)
         self.server = server
         self.data = ""
+        gSocket=self
 
     def handle_read(self):
         try:
