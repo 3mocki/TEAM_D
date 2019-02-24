@@ -112,7 +112,7 @@ class Reader:
         # temp = int(temperature / 10) + 3
         # if temp > 7:
         #     temp = 7
-        ae = (calibration['n'][temp]) * ae
+        ae = (calibration['n'][self.ftemp]) * ae
         we = (we - ae) / calibration['sensitivity']
         if we / 1000 > 0:
             return we / 1000
