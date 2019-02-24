@@ -69,9 +69,9 @@ class Reader:
 
     def read_temp(self):
         mV = self.__read_adc(Reader.mux_channel['temp1'])
-        temp = (mV - 500) / 10  # Celcius Value
+        temp = (mV - 500) * 0.1  # Celcius Value
         ftemp = (temp * 1.8) + 32  # Celcius to Fahrenheit
-        return round(ftemp - 30, 2)
+        return round(ftemp, 2)
 
     def read_pm(self):
         mV = self.__read_adc(Reader.mux_channel['pm2_5'])
@@ -104,14 +104,14 @@ class Reader:
         we = self.__read_adc(Reader.mux_channel[name]['we'])
         ae = self.__read_adc(Reader.mux_channel[name]['ae'])
 
-        # Fahrenheit to Celcius ; There is a probelm if your Faherenheit temperature value is over 60
-        temperature = (self.read_temp() - 32) / 1.8
+        # # Fahrenheit to Celcius ; There is a probelm if your Faherenheit temperature value is over 60
+        # temperature = (self.read_temp() - 32) / 1.8
         calibration = Reader.calibration[name]
         we = we - calibration['we_zero']
         ae = ae - calibration['ae_zero']
-        temp = int(temperature / 10) + 3
-        if temp > 7:
-            temp = 7
+        # temp = int(temperature / 10) + 3
+        # if temp > 7:
+        #     temp = 7
         ae = (calibration['n'][temp]) * ae
         we = (we - ae) / calibration['sensitivity']
         if we / 1000 > 0:
